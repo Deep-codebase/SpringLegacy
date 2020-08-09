@@ -71,7 +71,7 @@
 <body>
 	
 	<jsp:include page="header.jsp"></jsp:include>
-	<c:url value="/submitvendor" var="submitvendor" />
+	<c:url value="/management/submitvendor" var="submitvendor" />
 	<c:url value="/management/ajaxdata" var="sendjson" />
 	<div class="container">
 		<form:form action="${submitvendor}" modelAttribute="theVendor"

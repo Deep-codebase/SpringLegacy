@@ -28,12 +28,21 @@ public class ManagementSecurity extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/register").permitAll().antMatchers("/login").permitAll()
-				.antMatchers("/resources/**").permitAll().antMatchers("/management/**").hasAnyRole("ADMIN").anyRequest()
-				.authenticated().and().csrf().disable().formLogin().loginPage("/login").failureUrl("/login?error=true")
-				.defaultSuccessUrl("/management/list-customers", true).usernameParameter("email")
-				.passwordParameter("password").and().logout();
-	}
+		http.authorizeRequests().antMatchers("/register").permitAll()
+		.antMatchers("/login").permitAll()
+		.antMatchers("/resources/**").permitAll()
+		.antMatchers("/management/list-customers").hasAnyRole("ADMIN","USER")//hasAnyRole("ADMIN")
+		.antMatchers("/management/showVendor").hasRole("ADMIN")
+		.anyRequest()
+		.authenticated().and().csrf().disable()
+		.formLogin().loginPage("/login").failureUrl("/login?error=true")
+		.defaultSuccessUrl("/management/list-customers", true)
+		.usernameParameter("email").passwordParameter("password")
+		.and()
+		.exceptionHandling().accessDeniedPage("/accessDenied")
+		.and()
+		.logout();
+	} 
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {

@@ -1,6 +1,6 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <head>
 <title>Bootstrap Example</title>
 
@@ -40,9 +40,10 @@
 
 		<!-- Links -->
 		<ul class="navbar-nav">
-			<li class="nav-item"><a class="nav-link"
-				href="/management/list-customers">Customer List</a></li>
-			<li class="nav-item"><a class="nav-link" href="${vendorForm }">Vendor Details</a></li>
+			<li class="nav-item"><a class="nav-link" href="/management/list-customers">Customer List</a></li>
+			<sec:authorize access="hasRole('ADMIN')">
+				<li class="nav-item"><a class="nav-link" href="${vendorForm }">Vendor Details</a></li>
+			</sec:authorize>
 		</ul>
 		<c:url value='/logout' var="logoutVar"/>
 		<ul class="navbar-nav  ml-auto">

@@ -11,6 +11,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.resources.entity.AuthUser;
 import com.resources.entity.UserDTO;
 
 @Repository
@@ -34,6 +35,12 @@ public class UserDAOImpl implements UserDAO{
 			return null;
 		}
 		
+	}
+
+	@Override
+	public void saveAuthUser(AuthUser authuser) {
+		Session session = entityManager.unwrap(Session.class);
+		session.save(authuser);
 	}
 
 }
